@@ -1,10 +1,3 @@
-/**
- * Debugging Guide
- * 1. Make the code more readable
- * 2. Pick up calculation errors
- * 3. Make these calculations robust such that the calculation does not give an incorrect result, it throws an error to the user if something has gone wrong (parameter used with an incorrect unit of measurement, etc)
- */
-
 // Given Parameters
 const calculationValues = {
   vel: 10000,  // velocity (km/h)
@@ -15,18 +8,16 @@ const calculationValues = {
   fbr: 0.5, // fuel burn rate (kg/s)
 
 }
-const d2 = calculationValues.d + (calculationValues.vel * calculationValues.time / 3600) //calcultes new distance
-const rf = calculationValues.fuel - (calculationValues.fbr * calculationValues.time )//calculates remaining fuel
-const vel2 = calcNewVel(calculationValues.acc, calculationValues.vel, calculationValues.time) //calculates new velocity based on acceleration
-
-// Pick up an error with how the function below is called and make it robust to such errors
-calcNewVel = (vel, acc, time) => { 
-  return vel + (acc*time)
+const calcNewVel = (vel, acc, time) => { //declared the calcNewVel and moved it above the calculation as it could not be accessed bofore initialization 
+  return vel + (acc * time * 3.6 ) //to convert (m/s to km)
 }
-/*
+const d2 = calculationValues.d + (calculationValues.vel * calculationValues.time / 3600) //calcultes new distance in kms
+const rf = calculationValues.fuel - (calculationValues.fbr * calculationValues.time )//calculates remaining fuel
+const vel2 = calcNewVel(calculationValues.vel, calculationValues.acc, calculationValues.time) //calculates new velocity based on acceleration
+
 console.log(`Corrected New Velocity: ${vel2} km/h`);
 console.log(`Corrected New Distance: ${d2} km`);
-console.log(`Corrected Remaining Fuel: ${rf} kg`);*/
+console.log(`Corrected Remaining Fuel: ${rf} kg`);
 
 
 
